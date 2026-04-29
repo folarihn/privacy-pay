@@ -104,7 +104,7 @@ export default function LandingPage() {
             Cipher Pay
           </div>
           <div className="text-[13px] text-[color:var(--color-text-muted)]">
-            Built for Solana Renaissance Hackathon 2026
+            Privacy infrastructure for Solana
           </div>
           <div className="flex items-center gap-4 text-[13px] text-[color:var(--color-text-muted)]">
             <a

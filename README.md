@@ -104,9 +104,9 @@ With Cipher Pay you can shield assets, send privately, and attach **end-to-end e
 
 ### Swaps note (important)
 - Jupiter Ultra swaps are **mainnet-only** and require an API key header.
-- Shielding features are currently built/tested for **devnet**.
+- Set `NEXT_PUBLIC_HELIUS_RPC_URL` to a mainnet Helius endpoint to enable all mainnet features.
 
 ---
 
 ## ⚠️ Disclaimer
-This is a hackathon prototype. Do not use real funds. Privacy and compliance features are evolving—use responsibly.
+Cipher Pay is in active development. Privacy and compliance features are evolving — use responsibly and verify all transactions before sending real funds.

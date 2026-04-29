@@ -3,7 +3,6 @@
 Cipher Pay is designed to enable **privacy-preserving payment links** on Solana. The project evolves in two distinct phases, moving from cryptographic privacy (Phase 0) to zero-knowledge privacy (Phase 1).
 
 ## Phase 0: Client-Side Privacy (Current)
-*Implemented for the Hackathon MVP.*
 
 In this phase, we use standard Solana transfers but leverage **client-side encryption** to protect the "intent" and "content" of the payment (the memo) from public view.
 
