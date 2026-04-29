@@ -1,4 +1,4 @@
-import { PublicKey, SystemProgram, Transaction, TransactionInstruction, ComputeBudgetProgram } from "@solana/web3.js";
+import { PublicKey, SystemProgram, Transaction, TransactionInstruction } from "@solana/web3.js";
 import { Buffer } from "buffer";
 import type { SendPaymentParams, SendPaymentResult } from "@/lib/solana/paymentEngine";
 import { connection } from "@/lib/connection";

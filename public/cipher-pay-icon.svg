@@ -1,0 +1,5 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#09090B" />
+  <text x="200" y="240" font-size="200" text-anchor="middle" font-family="system-ui" fill="#7C3AED">⬡</text>
+  <text x="200" y="340" font-size="48" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="600" fill="#FAFAFA">CP</text>
+</svg>

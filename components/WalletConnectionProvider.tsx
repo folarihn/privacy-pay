@@ -4,13 +4,9 @@ import { ReactNode, useMemo } from "react";
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import {
-  PhantomWalletAdapter,
-  SolflareWalletAdapter,
-  TrustWalletAdapter,
-  CoinbaseWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
 import { BackpackWalletAdapter } from "@solana/wallet-adapter-backpack";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+import { SolflareWalletAdapter } from "@solana/wallet-adapter-solflare";
 import { SOLANA_RPC_ENDPOINT } from "@/lib/connection";
 
 // Default styles that can be overridden by your app
@@ -28,8 +24,6 @@ export function WalletConnectionProvider({ children }: WalletConnectionProviderP
       new PhantomWalletAdapter(),
       new SolflareWalletAdapter({ network: WalletAdapterNetwork.Devnet }),
       new BackpackWalletAdapter(),
-      new TrustWalletAdapter(),
-      new CoinbaseWalletAdapter(),
     ],
     [],
   );
@@ -42,4 +36,3 @@ export function WalletConnectionProvider({ children }: WalletConnectionProviderP
     </ConnectionProvider>
   );
 }
-

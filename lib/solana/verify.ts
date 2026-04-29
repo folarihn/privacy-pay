@@ -1,5 +1,5 @@
-import { Connection, PublicKey } from "@solana/web3.js";
 import { connection } from "@/lib/connection";
+import { MEMO_PROGRAM_ID, MEMO_V1_PROGRAM_ID, NOOP_PROGRAM_ID } from "@/lib/memo-sdk/types";
 import bs58 from "bs58";
 
 export type VerificationResult = {
@@ -138,25 +138,25 @@ export async function verifyTransaction(
     // Verify memo exists if expected
     // This prevents "replay" of a standard transfer as a "memo transfer"
     if (expectedMemoEncrypted) {
-        const MEMO_PROGRAM_ID = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcQb";
-        const MEMO_V1_PROGRAM_ID = "Memo1UhkJRfHyvLelZZ1i0yZNqOzVR5yq9QTYX3uad4";
-        const NOOP_PROGRAM_ID = "noopb9bkMVfRPU8AsbpTUg8AQkHtKwMYZiFUjNRtMmV";
+        const memoProgramIdStr = MEMO_PROGRAM_ID.toBase58();
+        const memoV1ProgramIdStr = MEMO_V1_PROGRAM_ID.toBase58();
+        const noopProgramIdStr = NOOP_PROGRAM_ID.toBase58();
         let foundMemo = false;
 
         for (const ix of instructions) {
             const progId = "programId" in ix ? ix.programId.toBase58() : "";
 
             // Case 1: Parsed Instruction (spl-memo)
-            if ("program" in ix && (ix.program === "spl-memo" || progId === MEMO_PROGRAM_ID || progId === MEMO_V1_PROGRAM_ID)) {
+            if ("program" in ix && (ix.program === "spl-memo" || progId === memoProgramIdStr || progId === memoV1ProgramIdStr)) {
                 if (typeof ix.parsed === "string" && ix.parsed === expectedMemoEncrypted) {
                     foundMemo = true;
                     break;
                 }
             }
-            
+
             // Case 2: Raw/PartiallyDecoded Instruction (Noop or Memo not parsed)
-            if (!("program" in ix) || progId === NOOP_PROGRAM_ID) {
-                if (progId === MEMO_PROGRAM_ID || progId === MEMO_V1_PROGRAM_ID || progId === NOOP_PROGRAM_ID) {
+            if (!("program" in ix) || progId === noopProgramIdStr) {
+                if (progId === memoProgramIdStr || progId === memoV1ProgramIdStr || progId === noopProgramIdStr) {
                     // Try to decode bs58 data
                     try {
                         if ("data" in ix) {
@@ -167,8 +167,8 @@ export async function verifyTransaction(
                                 break;
                             }
                         }
-                    } catch (e) {
-                        // Ignore
+                    } catch {
+                        // ignore
                     }
                 }
             }

@@ -1,0 +1,59 @@
+{
+  "lastSeeded": "2026-04-18T09:07:18.101Z",
+  "usdcMint": "DGTpjeG3JpbvKF5D1SXTbtzTm3q4fc9jbRaUjgzJSr1R",
+  "wallets": {
+    "alice": {
+      "publicKey": "6guVqKYDGd2KLSupaf5q9ThSfoRpHngUc56Aexa8sp53",
+      "shieldedSOL": 0.5,
+      "shieldedUSDC": 100,
+      "publicSOL": 0.4808335,
+      "publicUSDC": 900
+    },
+    "bob": {
+      "publicKey": "2G3nRCc7ujQnmvmJwwGeTyjKfAhqLrqwkr4djK7Wsata",
+      "shieldedSOL": 1,
+      "shieldedUSDC": 100,
+      "publicSOL": 2,
+      "publicUSDC": 900
+    },
+    "carol": {
+      "publicKey": "C27C25DXLrUZfiZ7FfnwDWdGRgFiozK4wrUddf2Y75L6",
+      "shieldedSOL": 0.5,
+      "shieldedUSDC": 100,
+      "publicSOL": 1.49588934,
+      "publicUSDC": 900
+    }
+  },
+  "demoTransactions": [
+    {
+      "id": "tx1",
+      "from": "alice",
+      "to": "bob",
+      "amount": 25,
+      "token": "USDC",
+      "memo": "Invoice #1042 — Design work",
+      "timestamp": "2026-04-17T09:07:18.101Z",
+      "signature": "pending"
+    },
+    {
+      "id": "tx2",
+      "from": "carol",
+      "to": "alice",
+      "amount": 0.1,
+      "token": "SOL",
+      "memo": "Q4 contractor payment",
+      "timestamp": "2026-04-17T21:07:18.101Z",
+      "signature": "pending"
+    },
+    {
+      "id": "tx3",
+      "from": "bob",
+      "to": "carol",
+      "amount": 50,
+      "token": "USDC",
+      "memo": "Reimbursement — team dinner",
+      "timestamp": "2026-04-18T07:07:18.101Z",
+      "signature": "pending"
+    }
+  ]
+}

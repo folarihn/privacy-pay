@@ -1,7 +1,13 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
+    const origin = request.headers.get("origin");
+    const urlOrigin = request.nextUrl.origin;
+    if (origin && origin !== urlOrigin) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
     const body = await request.json();
     const rpcUrl = process.env.HELIUS_RPC_URL;
 

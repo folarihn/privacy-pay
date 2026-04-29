@@ -1,100 +1,229 @@
 import Link from "next/link";
-import { ArrowRight, Shield, Lock, Zap } from "lucide-react";
+import { DemoStatsRow } from "@/components/DemoStatsRow";
 
 export default function LandingPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white selection:bg-solana-green selection:text-black">
-      {/* Hero Section */}
-      <div className="flex flex-col items-center text-center max-w-4xl px-6 pt-32 pb-16 space-y-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-medium text-solana-purple">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-solana-purple opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-solana-purple"></span>
-          </span>
-          Live on Solana Devnet
-        </div>
+    <main className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text-secondary)]">
+      <section className="px-6 pt-24 text-center">
+        <div className="mx-auto w-full max-w-[680px]">
+          <div className="mb-5 font-mono text-[11px] tracking-[0.06em] text-[color:var(--color-text-muted)]">
+            ⬡&nbsp;&nbsp;ZK COMPRESSION&nbsp;&nbsp;·&nbsp;&nbsp;END-TO-END ENCRYPTED&nbsp;&nbsp;·&nbsp;&nbsp;LIGHT PROTOCOL
+          </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400">
-          Privacy on Solana, <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-solana-green to-solana-purple">
-            Simplified.
-          </span>
-        </h1>
-
-        <p className="text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">
-          Shield your assets with Zero-Knowledge Compression. Send end-to-end encrypted memos. 
-          Experience the future of private payments on Solana without the complexity.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-          <Link
-            href="/dashboard"
-            className="group relative inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white transition-all duration-200 bg-white/10 border border-white/10 rounded-full hover:bg-white/20 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-solana-green focus:ring-offset-black"
-          >
-            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-solana-purple/20 to-solana-green/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-            <span className="relative flex items-center gap-2">
-              Use Tech Now
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <h1 className="font-bold tracking-[-0.02em] leading-[1.1]">
+            <span className="block text-[clamp(42px,6vw,64px)] text-[color:var(--color-text-primary)]">
+              Privacy on Solana,
             </span>
-          </Link>
-          
-          <Link
-            href="https://github.com/yomite47/privacy-pay"
-            target="_blank"
-            className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-slate-300 transition-all duration-200 bg-transparent border border-slate-800 rounded-full hover:text-white hover:border-slate-600 focus:outline-none"
-          >
-            View Code
-          </Link>
-        </div>
-      </div>
+            <span className="block text-[clamp(42px,6vw,64px)] text-[color:var(--color-accent)]">
+              Simplified.
+            </span>
+          </h1>
 
-      {/* Features Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl px-6 py-24 w-full">
-        <FeatureCard
-          icon={<Shield className="w-6 h-6 text-solana-green" />}
-          title="Shielded Accounts"
-          description="Convert public SOL into private, ZK-compressed SOL. Your balance is stored in a compressed state tree, visible only to you."
-        />
-        <FeatureCard
-          icon={<Lock className="w-6 h-6 text-solana-purple" />}
-          title="Encrypted Memos"
-          description="Attach private notes to payments. Encrypted client-side using your wallet signature, ensuring only the recipient can read them."
-        />
-        <FeatureCard
-          icon={<Zap className="w-6 h-6 text-yellow-400" />}
-          title="Light Speed"
-          description="Powered by Light Protocol and Helius. Enjoy the speed of Solana with the privacy of Zero-Knowledge proofs."
-        />
-      </div>
+          <p className="mx-auto mt-5 max-w-[480px] text-[16px] leading-[1.7] text-[color:var(--color-text-secondary)]">
+            Shield assets with ZK compression, attach end-to-end encrypted memos, and ship receipts that can be verified on-chain.
+          </p>
 
-      {/* Tech Stack Footer */}
-      <div className="mt-auto py-12 text-center text-slate-500 text-sm">
-        <p>Built for the Solana Renaissance Hackathon 2026</p>
-        <div className="flex justify-center gap-4 mt-4">
-          <span className="hover:text-white transition-colors cursor-default">Light Protocol</span>
-          <span>•</span>
-          <span className="hover:text-white transition-colors cursor-default">Helius</span>
-          <span>•</span>
-          <span className="hover:text-white transition-colors cursor-default">Next.js</span>
+          <div className="mt-6 flex items-center justify-center text-[13px] text-[color:var(--color-text-secondary)]">
+            <span>✓ Non-custodial</span>
+            <span className="mx-4 h-[14px] w-px bg-[color:var(--color-border)]" />
+            <span>✓ Open source</span>
+            <span className="mx-4 h-[14px] w-px bg-[color:var(--color-border)]" />
+            <span>✓ ZK-compressed</span>
+          </div>
+
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <Link href="/dashboard" className="cipher-btn-primary px-7 py-3 text-[15px]">
+              Use Tech Now →
+            </Link>
+            <Link
+              href="https://github.com/yomite47/privacy-pay"
+              target="_blank"
+              className="cipher-btn-ghost px-7 py-3 text-[15px]"
+            >
+              View Code
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <section className="mx-auto mt-20 w-full max-w-[960px] px-6">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+          <FeatureCard
+            accentColor="var(--color-accent)"
+            eyebrow="PRIVACY"
+            title="Shielded accounts"
+            description="Convert public SOL into private, ZK-compressed SOL. Your balance is stored in a compressed state tree."
+            icon={<ShieldIcon />}
+            footer={
+              <div className="flex flex-wrap gap-2">
+                <span className="cipher-badge-shielded">ZK Compressed</span>
+                <span className="cipher-badge-shielded">Light Protocol</span>
+              </div>
+            }
+          />
+
+          <FeatureCard
+            accentColor="var(--color-emerald)"
+            eyebrow="MESSAGING"
+            title="Encrypted memos"
+            description="Attach private notes to payments. Encrypted client-side using wallet-derived keys so only the recipient can read them."
+            icon={<LockIcon />}
+            footer={
+              <div className="flex flex-wrap gap-2">
+                <span className="cipher-badge-shielded">E2E Encrypted</span>
+                <span className="cipher-badge-shielded">Wallet Derived Keys</span>
+              </div>
+            }
+          />
+
+          <FeatureCard
+            accentColor="var(--color-amber)"
+            eyebrow="PERFORMANCE"
+            title="Light speed"
+            description="Powered by Light Protocol and Helius. Fast settlement, minimal friction, and verification-first receipts."
+            icon={<BoltIcon />}
+            footer={
+              <div className="flex flex-wrap gap-2">
+                <span className="inline-flex items-center rounded-[20px] bg-[color:var(--color-amber-dim)] px-2 py-[2px] text-[11px] font-medium text-[color:var(--color-amber)]">
+                  Helius RPC
+                </span>
+                <span className="inline-flex items-center rounded-[20px] bg-[color:var(--color-amber-dim)] px-2 py-[2px] text-[11px] font-medium text-[color:var(--color-amber)]">
+                  &lt; 400ms
+                </span>
+              </div>
+            }
+          />
+        </div>
+      </section>
+
+      <DemoStatsRow />
+
+      <footer className="mt-20 w-full border-t border-[color:var(--color-border-subtle)] p-6">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-3">
+          <div className="text-[14px] font-medium text-[color:var(--color-text-primary)]">
+            Cipher Pay
+          </div>
+          <div className="text-[13px] text-[color:var(--color-text-muted)]">
+            Built for Solana Renaissance Hackathon 2026
+          </div>
+          <div className="flex items-center gap-4 text-[13px] text-[color:var(--color-text-muted)]">
+            <a
+              href="https://lightprotocol.com"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors duration-150 hover:text-[color:var(--color-text-primary)]"
+            >
+              Light Protocol
+            </a>
+            <a
+              href="https://helius.xyz"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors duration-150 hover:text-[color:var(--color-text-primary)]"
+            >
+              Helius
+            </a>
+            <a
+              href="https://nextjs.org"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors duration-150 hover:text-[color:var(--color-text-primary)]"
+            >
+              Next.js
+            </a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
 
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+function FeatureCard({
+  accentColor,
+  icon,
+  eyebrow,
+  title,
+  description,
+  footer,
+}: {
+  accentColor: string;
+  icon: React.ReactNode;
+  eyebrow: string;
+  title: string;
+  description: string;
+  footer: React.ReactNode;
+}) {
   return (
-    <div className="group relative p-8 rounded-3xl bg-slate-900/50 border border-white/5 hover:border-white/10 transition-colors">
-      <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-      <div className="relative space-y-4">
-        <div className="inline-flex p-3 rounded-xl bg-black border border-white/10">
+    <div className="cipher-card" style={{ borderTopColor: accentColor }}>
+      <div className="text-[color:var(--color-text-secondary)]">
+        <div className="text-[color:var(--color-text-secondary)]" style={{ color: accentColor }}>
           {icon}
         </div>
-        <h3 className="text-xl font-bold text-white">{title}</h3>
-        <p className="text-slate-400 leading-relaxed">
-          {description}
-        </p>
+        <div className="mt-4">
+          <div className="cipher-label">{eyebrow}</div>
+          <div className="mt-2 text-[15px] font-medium text-[color:var(--color-text-primary)]">
+            {title}
+          </div>
+          <div className="mt-2 text-[14px] leading-[1.6] text-[color:var(--color-text-secondary)]">
+            {description}
+          </div>
+        </div>
+        <div className="mt-5">{footer}</div>
       </div>
     </div>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 3 19 6.5v6.1c0 5.1-3.4 8.7-7 9.9-3.6-1.2-7-4.8-7-9.9V6.5L12 3Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.2 12.2 11 14l3.8-4"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function LockIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M7.5 11V8.5a4.5 4.5 0 0 1 9 0V11"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M6.75 11h10.5c.966 0 1.75.784 1.75 1.75v6.5c0 .966-.784 1.75-1.75 1.75H6.75A1.75 1.75 0 0 1 5 19.25v-6.5c0-.966.784-1.75 1.75-1.75Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M12 15v2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function BoltIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }

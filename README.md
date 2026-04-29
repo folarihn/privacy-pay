@@ -1,78 +1,70 @@
 # Cipher Pay (Privacy Layer for Solana)
 
-Cipher Pay is a **Shielded Payment Interface** built on Solana. It brings true financial privacy to everyday users by leveraging **Zero-Knowledge Compression (Light Protocol)**. 
+Cipher Pay is a **shielded payments + private messaging app** on Solana. It brings financial privacy to everyday users by leveraging **Zero-Knowledge Compression (Light Protocol)**.
 
-With Cipher Pay, you can shield your assets, send funds privately, and attach **End-to-End Encrypted (E2EE) memos** that only the intended recipient can read. It solves the "transparent ledger" problem where everyone can see your transaction history and messages.
-
----
-
-## 🌟 Key Features
-
-### 🛡️ **Shielded Transactions**
-- **Go Private:** Convert public SOL into "Shielded SOL" (ZK-compressed assets).
-- **Hide Your Tracks:** Transfers between shielded accounts break the on-chain link between sender and receiver.
-- **Low Cost:** Powered by Solana's state compression, ensuring privacy is affordable.
-
-### 🔐 **End-to-End Encrypted Memos**
-- **Private Messaging:** Attach notes (e.g., "For Design Work", "Salary") that are encrypted client-side.
-- **Secure Key Exchange:** Payment links automatically share your encryption key so senders can write messages only *you* can decode.
-- **No Snooping:** Even the server cannot read your memos.
-
-### 📒 **Contact Book**
-- **Save Friends:** Store frequent addresses and their unique privacy keys.
-- **Quick Pay:** Send money instantly without needing to ask for a payment link every time.
-- **Syncs Locally:** Your contacts are stored securely on your device.
-
-### 📨 **Receipt-Based Inbox**
-- **Proof of Payment:** Senders generate a "Receipt Link" after paying.
-- **Claim & Decrypt:** Receivers use the receipt to verify the transaction and decrypt the private memo in their Inbox.
+With Cipher Pay you can shield assets, send privately, and attach **end-to-end encrypted memos** that only the intended recipient can read. It reduces the “transparent ledger” problem (public balances, public transfer graphs, public notes).
 
 ---
 
-## 🚀 Step-by-Step User Guide (Devnet)
+## Key Features
 
-### 1️⃣ Prerequisite: Wallet Setup
-1. Install a Solana wallet like **Phantom**, **Solflare**, or **Backpack**.
-2. **Switch to Devnet**:
-   - *Phantom*: Settings > Developer Settings > Change Network > **Devnet**.
-   - *Solflare*: Settings > General > Network > **Devnet**.
-3. **Get Free Devnet SOL**: Visit [faucet.solana.com](https://faucet.solana.com) and airdrop 1-2 SOL to your wallet address.
+### Shielded Wallet (Light Protocol)
+- **Shield / Unshield:** Move SOL or devnet USDC between your public wallet and shielded balance.
+- **Private sends:** Transfer from your shielded balance to a recipient with unlinkability benefits from compression.
 
-### 2️⃣ How to Request Payment (Securely)
-To ensure you can read the private messages people send you:
-1. Connect your wallet and go to the **Dashboard**.
-2. Click the **"Request Payment"** tab.
-3. Click **"Create Payment Link"**.
-4. **Copy the Link** and send it to the payer.
-   - *Why?* This link contains your **Privacy Key**. Without it, the sender can't encrypt messages for you!
+### End-to-End Encrypted Memos (Memo SDK)
+- **Client-side encryption:** Notes are encrypted before they hit the chain.
+- **Reusable module:** Memo logic is extracted into a small SDK under `lib/memo-sdk/*`.
 
-### 3️⃣ How to Send Money
-1. Open a **Payment Link** sent to you (or select a Contact).
-2. The app checks for encryption keys:
-   - **Shielded 🛡️**: Key found! You can write a truly private memo.
-   - **Warning ⚠️**: No key found. You can choose to send a **Public Memo** (readable by anyone) or a **Private Note** (readable only by you).
-3. Enter the **Amount** (in SOL).
-4. Click **Send Private Payment**.
-5. Once successful, click **"Copy Receipt Link"** and send it to the receiver.
+### Payment Links + Inbox
+- **Request payments:** Generate a payment link that includes memo metadata for the sender.
+- **Receipts inbox:** Add receipts and decrypt memos when you “unlock” your inbox with a wallet signature.
 
-### 4️⃣ How to Check Your Inbox
-1. Go to the **Inbox** tab.
-2. If you have a Receipt Link, just open it in your browser.
-3. Otherwise, paste the **Receipt JSON** into the text box.
-4. Click **"Add Payment to Inbox"**.
-5. Click **"Sign to Unlock Inbox"**.
-   - *Note:* This is a free signature request used to derive your decryption keys securely.
-6. Your private memos will be decrypted and displayed!
+### Jupiter Swaps
+- **Swap & Shield:** Swap supported tokens into SOL/USDC then shield in one flow (Jupiter Ultra).
+- **Token-to-token swap:** A Swap panel lets users swap between common liquid tokens via Jupiter.
+
+### Solana Actions / Blinks
+- **Blinks support:** Payment links can be shared as Blink URLs (dial.to format) for Phantom / X / Blink clients.
+- **Endpoints:** `GET /actions.json`, `GET|POST /api/actions/pay`.
+
+### Compliance Screening (Range Protocol)
+- **Recipient screening:** Send panel checks recipient risk and blocks flagged addresses.
+
+### Notifications + Batch Send
+- **Real-time activity:** Helius Enhanced WebSocket notifications with a navbar bell.
+- **Batch private send:** CSV-driven multi-recipient private payouts (sequential execution to avoid state conflicts).
 
 ---
 
-## 💻 For Developers
+## User Guide
+
+### Wallet setup
+- Install Phantom / Solflare / Backpack.
+- For shielding features, use **Devnet** (SOL faucet works on Devnet).
+
+### Request a payment (link)
+- Open **Dashboard → Request Payment** and generate a payment link.
+- Share the link with the sender.
+
+### Send privately
+- Shield funds first (Dashboard → Shield).
+- Use **Send → recipient → amount**, optionally with an encrypted memo.
+
+### Inbox
+- Open **Inbox** and unlock with a signature to decrypt private memos.
+
+---
+
+## For Developers
 
 ### Tech Stack
-- **Frontend**: Next.js 14 (App Router), Tailwind CSS
-- **Blockchain**: Solana Web3.js
-- **Privacy Engine**: Light Protocol (ZK Compression)
-- **RPC Provider**: Helius (DA & Compression Support)
+- **Frontend**: Next.js (App Router), React, TypeScript (strict), Tailwind v4
+- **Blockchain**: `@solana/web3.js`, Wallet Adapter
+- **Privacy Engine**: Light Protocol (ZK Compression + Compressed Tokens)
+- **RPC Provider**: Helius (for compression support)
+- **Swaps**: Jupiter Ultra REST API (no SDK)
+- **Blinks**: `@solana/actions`
 
 ### Installation
 1. **Clone the repo:**
@@ -86,10 +78,17 @@ To ensure you can read the private messages people send you:
    npm install
    ```
 
-3. **Configure Environment:**
-   Create a `.env.local` file:
+3. **Configure environment** (`.env.local`):
    ```env
-   NEXT_PUBLIC_HELIUS_RPC_URL=https://devnet.helius-rpc.com/?api-key=YOUR_KEY
+   # RPC (Devnet for shielding)
+   NEXT_PUBLIC_RPC_URL=https://devnet.helius-rpc.com/?api-key=YOUR_KEY
+
+   # Jupiter Ultra (Mainnet swaps only)
+   NEXT_PUBLIC_JUPITER_API_KEY=YOUR_JUPITER_KEY
+
+   # Range compliance screening
+   RANGE_API_KEY=YOUR_RANGE_KEY
+   RANGE_API_URL=https://api.range.org/v1
    ```
 
 4. **Run the app:**
@@ -97,8 +96,17 @@ To ensure you can read the private messages people send you:
    npm run dev
    ```
 
+### Demo Mode (optional)
+- Seed demo wallets + balances:
+  ```bash
+  npm run seed:demo
+  ```
+
+### Swaps note (important)
+- Jupiter Ultra swaps are **mainnet-only** and require an API key header.
+- Shielding features are currently built/tested for **devnet**.
+
 ---
 
 ## ⚠️ Disclaimer
-**This project is currently on Solana Devnet.**
-It is a proof-of-concept built for the **Solana Renaissance Hackathon**. Do not use real funds. ZK Compression is a powerful new technology; please use responsibly.
+This is a hackathon prototype. Do not use real funds. Privacy and compliance features are evolving—use responsibly.

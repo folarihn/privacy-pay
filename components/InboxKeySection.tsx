@@ -15,6 +15,7 @@ export function InboxKeySection() {
   const [exported, setExported] = useState<string>("");
   const [status, setStatus] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [advancedOpen, setAdvancedOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -108,115 +109,148 @@ export function InboxKeySection() {
   };
 
   return (
-    <section className="w-full max-w-xl rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-xl p-6 shadow-xl">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-xl font-bold text-white">
-            Inbox Encryption Keys
-          </h2>
-          <p className="mt-1 text-xs text-slate-400">
-            Manage your keys to decrypt private memos
-          </p>
+    <>
+      <section className="cipher-card">
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <div>
+            <div className="text-[15px] font-medium text-[color:var(--color-text-primary)]">
+              Inbox encryption keys
+            </div>
+            <div className="mt-0.5 text-[13px] text-[color:var(--color-text-secondary)]">
+              Manage your keys to decrypt private memos
+            </div>
+          </div>
+          <span className="cipher-badge-active">ACTIVE</span>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 shadow-inner shadow-emerald-900/20">
-          <span className="text-xs font-bold text-emerald-400 uppercase tracking-wide">Active</span>
-        </div>
-      </div>
 
-      <div className="space-y-6">
-        <div>
-          <button
-            type="button"
-            onClick={handleRestoreFromWallet}
-            className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 px-4 py-4 text-sm font-bold text-white transition-all shadow-lg shadow-indigo-900/20"
+        <button
+          type="button"
+          onClick={handleRestoreFromWallet}
+          className="cipher-btn-primary w-full py-3 text-[14px]"
+        >
+          Restore keys from wallet signature
+        </button>
+
+        <div className="mt-2.5 text-center text-[12px] text-[color:var(--color-text-muted)]">
+          Recommended: uses your wallet signature to generate consistent keys across all devices.
+        </div>
+
+        <div className="mt-5 border-t border-[color:var(--color-border-subtle)]" />
+
+        <button
+          type="button"
+          onClick={() => setAdvancedOpen((v) => !v)}
+          className="flex w-full cursor-pointer items-center justify-between py-3.5"
+          aria-expanded={advancedOpen}
+        >
+          <span className="text-[14px] text-[color:var(--color-text-secondary)]">
+            Advanced options
+          </span>
+          <span
+            className={`text-[color:var(--color-text-muted)] transition-transform duration-200 ${
+              advancedOpen ? "rotate-180" : ""
+            }`}
           >
-            <div className="flex items-center justify-center gap-3">
-              Restore Keys from Wallet Signature
+            <ChevronDown />
+          </span>
+        </button>
+
+        {advancedOpen && (
+          <div className="pt-2">
+            <div className="cipher-label mb-2">PUBLIC ENCRYPTION KEY</div>
+            <div className="flex items-center justify-between gap-3">
+              <code className="cipher-mono truncate" title={publicKey}>
+                {publicKey || "No inbox encryption key available..."}
+              </code>
+              <button
+                type="button"
+                onClick={handleCopyPublicKey}
+                className="cipher-btn-ghost h-[34px] px-4 py-0 text-[13px]"
+              >
+                Copy
+              </button>
             </div>
-          </button>
-          <p className="mt-3 text-center text-xs text-slate-500 max-w-xs mx-auto">
-            Recommended: Uses your wallet signature to generate consistent keys across all your devices.
-          </p>
+
+            <div className="mt-4 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleExport}
+                className="cipher-btn-ghost h-[34px] px-4 py-0 text-[13px]"
+              >
+                Export Backup
+              </button>
+              <button
+                type="button"
+                onClick={handleImport}
+                className="cipher-btn-ghost h-[34px] px-4 py-0 text-[13px]"
+              >
+                Import Backup
+              </button>
+            </div>
+
+            <textarea
+              className="cipher-input mt-3 h-28 resize-y text-[12px]"
+              placeholder="Paste exported inbox keys JSON here..."
+              value={exported}
+              onChange={(e) => setExported(e.target.value)}
+            />
+          </div>
+        )}
+
+        {status && (
+          <div className="mt-4 rounded-[8px] border border-[color:var(--color-emerald-dim)] bg-[color:var(--color-emerald-dim)]/30 p-3">
+            <p className="text-[13px] text-[color:var(--color-emerald)]">{status}</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="mt-4 rounded-[8px] border border-red-900/40 bg-red-950/30 p-3">
+            <p className="text-[13px] text-red-200">{error}</p>
+          </div>
+        )}
+      </section>
+
+      <div className="mt-4 flex items-start gap-[10px] rounded-[var(--radius-md)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface)] px-4 py-3">
+        <div className="shrink-0 text-[color:var(--color-text-muted)]">
+          <LockLarge />
         </div>
-
-        <div className="pt-6 border-t border-white/10">
-          <details className="group">
-            <summary className="flex items-center justify-between cursor-pointer p-2 -m-2 rounded-xl hover:bg-white/5 transition-colors">
-              <span className="text-xs font-semibold text-slate-400 group-hover:text-slate-200 transition-colors">
-                Advanced Options
-              </span>
-              <div className="p-1 rounded-md text-slate-400 group-hover:text-white transition-colors">
-                <svg className="w-4 h-4 transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </summary>
-            
-            <div className="mt-4 space-y-4 animate-in fade-in slide-in-from-top-2">
-              <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1">Public Encryption Key</p>
-                    <code className="block w-full truncate text-xs font-mono text-emerald-400/80">
-                      {publicKey || "No inbox encryption key available..."}
-                    </code>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleCopyPublicKey}
-                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition-colors border border-white/5"
-                    title="Copy Key"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex gap-3">
-                  <button
-                    type="button"
-                    onClick={handleExport}
-                    className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-medium text-slate-300 transition-colors"
-                  >
-                    Export Backup
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleImport}
-                    className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-xs font-medium text-slate-300 transition-colors"
-                  >
-                    Import Backup
-                  </button>
-                </div>
-
-                <textarea
-                  className="w-full h-24 rounded-xl border border-white/10 bg-black/40 p-4 text-[10px] font-mono text-slate-400 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none transition-all"
-                  placeholder="Paste exported inbox keys JSON here..."
-                  value={exported}
-                  onChange={(e) => setExported(e.target.value)}
-                />
-              </div>
-            </div>
-          </details>
+        <div className="text-[13px] leading-[1.6] text-[color:var(--color-text-muted)]">
+          Your keys are derived from your wallet signature and never stored on disk. Losing access to your wallet means losing access to past memos.
         </div>
       </div>
+    </>
+  );
+}
 
-      {status && (
-        <div className="mt-6 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-          <p className="text-xs font-medium text-emerald-400 flex items-center gap-2">
-            {status}
-          </p>
-        </div>
-      )}
+function ChevronDown() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M6 9l6 6 6-6"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
-      {error && (
-        <div className="mt-6 p-3 rounded-xl bg-red-500/10 border border-red-500/20">
-          <p className="text-xs font-medium text-red-400 flex items-center gap-2">
-            {error}
-          </p>
-        </div>
-      )}
-    </section>
+function LockLarge() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M7.5 11V8.5a4.5 4.5 0 0 1 9 0V11"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M6.75 11h10.5c.966 0 1.75.784 1.75 1.75v6.5c0 .966-.784 1.75-1.75 1.75H6.75A1.75 1.75 0 0 1 5 19.25v-6.5c0-.966.784-1.75 1.75-1.75Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

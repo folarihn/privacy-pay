@@ -21,8 +21,10 @@ export default function TestZkPage() {
           const sol = lamports / LAMPORTS_PER_SOL;
           setZkBalance(sol);
           addLog(`Balance: ${sol} ZK-SOL`);
-      } catch (e: any) {
-          addLog(`Error fetching balance: ${e.message}`);
+      } catch (e: unknown) {
+          const message =
+            e instanceof Error ? e.message : typeof e === "string" ? e : JSON.stringify(e);
+          addLog(`Error fetching balance: ${message}`);
       }
   };
 
@@ -45,12 +47,12 @@ export default function TestZkPage() {
       });
       addLog(`Success! Signature: ${signature}`);
       setStatus("Success");
-    } catch (e: any) {
-      console.error(e);
-      addLog(`Error: ${e.message}`);
-      if (e.logs) {
-          addLog(`Logs: ${JSON.stringify(e.logs)}`);
-      }
+    } catch (e: unknown) {
+      const message =
+        e instanceof Error ? e.message : typeof e === "string" ? e : JSON.stringify(e);
+      addLog(`Error: ${message}`);
+      const logs = (e as { logs?: unknown }).logs;
+      if (logs !== undefined) addLog(`Logs: ${JSON.stringify(logs)}`);
       setStatus("Error");
     }
   };
@@ -79,12 +81,12 @@ export default function TestZkPage() {
           
           // Refresh balance
           setTimeout(fetchBalance, 2000);
-      } catch (e: any) {
-          console.error(e);
-          addLog(`Error: ${e.message}`);
-          if (e.logs) {
-              addLog(`Logs: ${JSON.stringify(e.logs)}`);
-          }
+      } catch (e: unknown) {
+          const message =
+            e instanceof Error ? e.message : typeof e === "string" ? e : JSON.stringify(e);
+          addLog(`Error: ${message}`);
+          const logs = (e as { logs?: unknown }).logs;
+          if (logs !== undefined) addLog(`Logs: ${JSON.stringify(logs)}`);
           setStatus("Error");
       }
   };
