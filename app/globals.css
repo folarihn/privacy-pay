@@ -2,6 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
+/* Enable class-based dark mode — .dark ancestor activates dark: variants */
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-bg: #09090B;
   --color-surface: #111113;
@@ -189,6 +192,32 @@ body {
 
 .cipher-loading-dot:nth-child(3) {
   animation-delay: 0.24s;
+}
+
+/* Hero Connect Wallet — pill shape */
+.hero-wallet-btn button,
+.hero-wallet-btn [class*="button"],
+.hero-wallet-btn [class*="Button"] {
+  border-radius: 9999px !important;
+  padding-left: 3rem !important;
+  padding-right: 3rem !important;
+  padding-top: 0.875rem !important;
+  padding-bottom: 0.875rem !important;
+  height: auto !important;
+  min-width: 220px !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 150ms ease !important;
+}
+
+.hero-wallet-btn button:hover,
+.hero-wallet-btn [class*="button"]:hover,
+.hero-wallet-btn [class*="Button"]:hover {
+  background: rgba(255, 255, 255, 0.88) !important;
 }
 
 /* Wallet Adapter Overrides */

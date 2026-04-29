@@ -5,8 +5,6 @@ import "./globals.css";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import { WalletConnectionProvider } from "@/components/WalletConnectionProvider";
 import { NavBar } from "@/components/NavBar";
-import { DemoBanner } from "@/components/DemoBanner";
-import { DemoModeProvider } from "@/hooks/useDemoMode";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,11 +38,8 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <WalletConnectionProvider>
-          <DemoModeProvider>
-            <NavBar />
-            <DemoBanner />
-            {children}
-          </DemoModeProvider>
+          <NavBar />
+          {children}
         </WalletConnectionProvider>
       </body>
     </html>

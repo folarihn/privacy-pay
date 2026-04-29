@@ -142,19 +142,22 @@ export default function LandingPage() {
             </span>
           </h1>
 
-          <div className="pt-2">
+          <div className="hero-wallet-btn pt-2">
             <UnifiedWalletButton />
           </div>
         </div>
 
       </div>
 
+      {/* Transition: black hero → white features */}
+      <div className="w-full h-32 bg-gradient-to-b from-black to-white shrink-0" />
+
       {/* About / Features Section */}
       <section className="w-full bg-white text-black py-24 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section Heading */}
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight mb-16 max-w-xl">
-            Built for Web3, <br />Rebuilt for Privacy.
+            Built for <span style={{ fontFamily: 'var(--font-hago)' }}>Web3</span>, <br />Rebuilt for <span style={{ fontFamily: 'var(--font-hago)' }}>Privacy</span>.
           </h2>
 
           {/* Bento Grid */}
@@ -220,17 +223,35 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Tech Stack Footer */}
-      <div className="w-full bg-white py-12 text-center text-gray-400 text-sm border-t border-gray-100">
-        <p>Built for the Solana Renaissance Hackathon 2026</p>
-        <div className="flex justify-center gap-4 mt-4">
-          <span className="hover:text-black transition-colors cursor-default">Light Protocol</span>
-          <span>•</span>
-          <span className="hover:text-black transition-colors cursor-default">Helius</span>
-          <span>•</span>
-          <span className="hover:text-black transition-colors cursor-default">Next.js</span>
+      {/* Footer */}
+      <footer className="w-full bg-black text-white px-6 py-6">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+
+          <div className="flex items-center gap-4">
+            <span style={{ fontFamily: 'var(--font-hago)' }} className="text-lg font-bold text-white">CipherPay</span>
+            <a
+              href="https://x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white transition-colors"
+              aria-label="X (Twitter)"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <p className="text-xs text-white/25">© 2026 CipherPay</p>
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse" />
+              <span className="text-[10px] text-white/40">Devnet</span>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </footer>
     </main>
   );
 }

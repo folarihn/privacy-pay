@@ -376,10 +376,10 @@ function InboxContent() {
   };
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden text-white">
+    <div className="flex flex-col flex-1 overflow-hidden">
 
       {/* Header bar — matches dashboard */}
-      <div className="flex items-center justify-between px-6 h-[65px] border-b border-white/[0.06] shrink-0">
+      <div className="flex items-center justify-between px-6 h-[65px] border-b border-black/[0.06] dark:border-white/[0.06] bg-[#f8f8f8] dark:bg-black shrink-0">
         <div>
           <h1 className="text-lg font-bold text-white">Inbox</h1>
         </div>
@@ -399,7 +399,7 @@ function InboxContent() {
       </div>
 
       {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto p-6 pb-24 md:pb-6">
+      <div className="flex-1 overflow-y-auto p-6 pb-24 md:pb-6 bg-[#f8f8f8] dark:bg-black">
         <div className="max-w-2xl mx-auto space-y-5">
 
         {/* Tabs */}
