@@ -166,7 +166,7 @@ export default function LandingPage() {
             {/* Card 1 — Universal Gas Wallet */}
             <div className="relative bg-[#f2f2f2] rounded-3xl p-6 flex flex-col justify-end overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="absolute top-4 left-4 right-4 bottom-24 flex items-center justify-center">
-                <Image src="/wallet-3d.png" alt="Universal Gas Wallet" width={240} height={240} className="object-contain w-full h-full drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
+                <Image src="/lock.gif" alt="Shielded Accounts" width={240} height={240} unoptimized className="object-contain w-full h-full drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="relative z-10">
                 <h3 className="text-lg font-bold text-black mb-1">Shielded Accounts</h3>
@@ -182,14 +182,14 @@ export default function LandingPage() {
                 </h3>
               </div>
               <div className="w-full flex items-center justify-center flex-1">
-                <Image src="/chain-3d.png" alt="Chain link" width={300} height={300} className="object-contain w-64 h-64 drop-shadow-lg group-hover:scale-105 transition-transform duration-500" />
+                <Image src="/eye-icons.png" alt="One Token All Round Privacy" width={500} height={500} className="object-contain w-[400px] h-[400px] drop-shadow-lg group-hover:scale-105 transition-transform duration-500" />
               </div>
             </div>
 
             {/* Card 3 — Unified Token Tracker */}
             <div className="relative bg-[#f2f2f2] rounded-3xl p-6 flex flex-col justify-end overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="absolute top-4 left-4 right-4 bottom-24 flex items-center justify-center">
-                <Image src="/tracker-3d.png" alt="Unified Token Tracker" width={240} height={240} className="object-contain w-full h-full drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
+                <Image src="/memos.gif" alt="Encrypted Memos" width={240} height={240} unoptimized className="object-contain w-full h-full drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="relative z-10">
                 <h3 className="text-lg font-bold text-black mb-1">Encrypted Memos</h3>
@@ -200,7 +200,7 @@ export default function LandingPage() {
             {/* Card 4 — Seedless Recovery */}
             <div className="relative bg-[#f2f2f2] rounded-3xl p-6 flex flex-col justify-end overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="absolute top-4 left-4 right-4 bottom-24 flex items-center justify-center">
-                <Image src="/recovery-3d.png" alt="Seedless Recovery" width={240} height={240} className="object-contain w-full h-full drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
+                <Image src="/zk-proof.png" alt="ZK Compression" width={240} height={240} className="object-contain w-full h-full drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="relative z-10">
                 <h3 className="text-lg font-bold text-black mb-1">ZK Compression</h3>
@@ -211,7 +211,7 @@ export default function LandingPage() {
             {/* Card 5 — Built in Trustworthy */}
             <div className="relative bg-[#f2f2f2] rounded-3xl p-6 flex flex-col justify-end overflow-hidden group hover:shadow-lg transition-shadow">
               <div className="absolute top-4 left-4 right-4 bottom-24 flex items-center justify-center">
-                <Image src="/trust-3d.png" alt="Built in Trustworthy" width={240} height={240} className="object-contain w-full h-full drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
+                <Image src="/shajky6.png" alt="Built-in Trust" width={240} height={240} className="object-contain w-full h-full drop-shadow-md group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="relative z-10">
                 <h3 className="text-lg font-bold text-black mb-1">Built-in Trust</h3>

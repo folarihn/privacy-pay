@@ -46,7 +46,7 @@ export function NavBar() {
               CipherPay
             </span>
 
-            <div className="[&_.wallet-adapter-button]:!bg-white [&_.wallet-adapter-button]:!text-black [&_.wallet-adapter-button]:!rounded-full [&_.wallet-adapter-button]:!font-bold [&_.wallet-adapter-button]:!px-6 [&_.wallet-adapter-button]:!h-10 hover:[&_.wallet-adapter-button]:!bg-gray-200 transition-colors">
+            <div className="nav-wallet-btn">
               <WalletStatus />
             </div>
 

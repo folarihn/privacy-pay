@@ -194,6 +194,32 @@ body {
   animation-delay: 0.24s;
 }
 
+/* Navbar Connect Wallet — small pill */
+.nav-wallet-btn button,
+.nav-wallet-btn [class*="button"],
+.nav-wallet-btn [class*="Button"] {
+  border-radius: 9999px !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.4rem !important;
+  height: auto !important;
+  min-width: unset !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 150ms ease !important;
+}
+
+.nav-wallet-btn button:hover,
+.nav-wallet-btn [class*="button"]:hover,
+.nav-wallet-btn [class*="Button"]:hover {
+  background: rgba(255, 255, 255, 0.88) !important;
+}
+
 /* Hero Connect Wallet — pill shape */
 .hero-wallet-btn button,
 .hero-wallet-btn [class*="button"],
