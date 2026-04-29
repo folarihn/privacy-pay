@@ -35,8 +35,8 @@ export async function simulateBeforeSend(
   transaction: Transaction,
 ): Promise<SimResult> {
   try {
-    const sim = await connection.simulateTransaction(transaction, {
-      // @ts-expect-error — web3.js v1 accepts this options object form
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sim = await (connection.simulateTransaction as any)(transaction, {
       sigVerify: false,
       commitment: "processed",
     });

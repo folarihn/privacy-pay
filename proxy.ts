@@ -24,7 +24,7 @@ function isRateLimited(key: string): boolean {
 // Only apply to server-side API routes that touch external services.
 const RATE_LIMITED_PATHS = ["/api/rpc", "/api/compliance"];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isRateLimitedPath = RATE_LIMITED_PATHS.some((p) => pathname.startsWith(p));
 
