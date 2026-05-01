@@ -17,28 +17,47 @@ export async function POST(request: NextRequest) {
     }
 
     // Security: Whitelist allowed RPC methods to prevent abuse
-    // This prevents attackers from using your API key for heavy/unauthorized calls (e.g. getProgramAccounts, airdrop)
     const allowedMethods = [
+      // Standard Solana
       'getLatestBlockhash',
       'getBalance',
       'getAccountInfo',
-      'sendTransaction',
       'getMultipleAccounts',
+      'getProgramAccounts',
       'getRecentPrioritizationFees',
       'getFeeForMessage',
       'simulateTransaction',
+      'sendTransaction',
+      'getTransaction',
+      'getSignaturesForAddress',
+      'getParsedTransaction',
+      'getParsedTransactions',
+      'getTokenAccountBalance',
+      'getTokenAccountsByOwner',
       'getSlot',
       'getHealth',
-      // Light Protocol / ZK Compression methods
-      'getProgramAccounts', // Required for fetching state trees
-      'getValidityProof',   // Required for ZK transactions
+      'getVersion',
+      'getBlockTime',
+      // Light Protocol / ZK Compression
+      'getValidityProof',
       'getCompressedAccount',
+      'getCompressedAccountBalance',
+      'getCompressedAccountsByOwner',
+      'getCompressedBalanceByOwner',
+      'getCompressedBalance',
       'getCompressedTokenAccountsByOwner',
+      'getCompressedTokenAccountsByDelegate',
+      'getCompressedTokenAccountBalance',
       'getCompressedTransaction',
       'getCompressedTransactionsByOwner',
+      'getIndexerSlot',
+      'getIndexerHealth',
+      'getStateTreeInfos',
+      // DAS / Helius
       'getAsset',
       'getAssetProof',
-      'getAssetsByOwner'
+      'getAssetsByOwner',
+      'getAssetsByGroup',
     ];
 
     if (!allowedMethods.includes(body.method)) {
@@ -46,13 +65,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Method not allowed' }, { status: 403 });
     }
 
+    // ZK proof generation calls can take longer — use extended timeout
+    const isHeavyMethod = ['getValidityProof', 'simulateTransaction'].includes(body.method);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), isHeavyMethod ? 30000 : 10000);
+
     const response = await fetch(rpcUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
-    });
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timeout));
 
     if (!response.ok) {
       return NextResponse.json(
